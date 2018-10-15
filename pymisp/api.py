@@ -1900,6 +1900,21 @@ class PyMISP(object):
         response = self._prepare_request('POST', url)
         return self._check_response(response)
 
+    # ############## Workers ##################
+
+    def get_workers(self):
+        """Get all the workers' state."""
+        url = urljoin(self.root_url, '/servers/serverSettings/download')
+        response = self._prepare_request('GET', url)
+        return self._check_response(response)["workers"]
+
+
+    def get_settings(self):
+        """Get all the server's settings."""
+        url = urljoin(self.root_url, '/servers/serverSettings/download')
+        response = self._prepare_request('GET', url)
+        return self._check_response(response)
+
     # ##############################################
     # ############### Non-JSON output ##############
     # ##############################################
