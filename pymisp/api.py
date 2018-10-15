@@ -1903,11 +1903,28 @@ class PyMISP(object):
     # ############## Workers ##################
 
     def get_workers(self):
-        """Get all the workers' state."""
+        """Get all the workers."""
         url = urljoin(self.root_url, '/servers/serverSettings/download')
         response = self._prepare_request('GET', url)
         return self._check_response(response)["workers"]
 
+    def start_worker(self, worker_type):
+        """Start a worker with the given type."""
+        url = urljoin(self.root_url, '/servers/startWorker/{}'.format(worker_type))
+        response = self._prepare_request('POST', url)
+        return self._check_response(response)
+
+    def stop_worker(self, worker_id):
+        """Stop a worker by id."""
+        url = urljoin(self.root_url, '/servers/stopWorker/{}'.format(worker_id))
+        response = self._prepare_request('POST', url)
+        return self._check_response(response)
+
+    def restart_workers(self):
+        """Restart all the workers."""
+        url = urljoin(self.root_url, '/servers/restartWorkers')
+        response = self._prepare_request('POST', url)
+        return self._check_response(response)
 
     def get_settings(self):
         """Get all the server's settings."""
